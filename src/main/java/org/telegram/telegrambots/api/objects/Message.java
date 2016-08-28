@@ -294,8 +294,9 @@ public class Message implements IBotApiObject {
 
 		if (hasText() && entities != null) {
 			// entities.forEach(x -> x.computeText(text));
-			for (MessageEntity entity : entities) {
+			for (MessageEntity entity : this.entities) {
 				entity.computeText(text);
+				System.out.println("****" + entity.getText()); //FIXME remove
 			}
 		}
 	}
