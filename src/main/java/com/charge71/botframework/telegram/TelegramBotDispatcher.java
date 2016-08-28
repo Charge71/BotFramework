@@ -90,7 +90,9 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 	}
 
 	public void init() {
+		logger.debug("Dispatcher init");
 		for (String botClass : botClasses) {
+			logger.debug("Dispatcher init bot " + botClass);
 			try {
 				TelegramBotDescriptor tbd = TelegramBotDescriptor.get(botClass);
 				if (tbd.isTelegramBotApiClientAware()) {
