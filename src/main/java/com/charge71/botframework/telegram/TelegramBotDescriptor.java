@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.charge71.botframework.telegram.annotations.TelegramBot;
 import com.charge71.botframework.telegram.annotations.TelegramBotCommand;
 import com.charge71.botframework.telegram.annotations.TelegramBotDefault;
@@ -18,6 +20,8 @@ import com.charge71.botframework.telegram.annotations.TelegramBotUrl;
  *
  */
 public class TelegramBotDescriptor {
+
+	private static final Logger logger = Logger.getLogger(TelegramBotDescriptor.class);
 
 	private String token;
 	private String baseUrl;
@@ -48,33 +52,40 @@ public class TelegramBotDescriptor {
 			if (telegramBotCommand != null) {
 				if (telegramBotCommand.prefix()) {
 					descriptor.prefixCommands.put(telegramBotCommand.value(), method);
+					logger.debug("Prefix command " + telegramBotCommand.value() + " " + method.getName());
 				} else {
 					descriptor.commands.put(telegramBotCommand.value(), method);
+					logger.debug("Command " + telegramBotCommand.value() + " " + method.getName());
 				}
 				continue;
 			}
 			TelegramBotDefault telegramBotDefault = method.getAnnotation(TelegramBotDefault.class);
 			if (telegramBotDefault != null) {
 				descriptor.botDefault = method;
+				logger.debug("Default " + method.getName());
 				continue;
 			}
 			TelegramBotLocation telegramBotLocation = method.getAnnotation(TelegramBotLocation.class);
 			if (telegramBotLocation != null) {
 				descriptor.location = method;
+				logger.debug("Location " + method.getName());
 				continue;
 			}
 			TelegramBotText telegramBotText = method.getAnnotation(TelegramBotText.class);
 			if (telegramBotText != null) {
 				if (telegramBotText.prefix()) {
 					descriptor.prefixTexts.put(telegramBotText.value(), method);
+					logger.debug("Prefix text " + telegramBotText.value() + " " + method.getName());
 				} else {
 					descriptor.texts.put(telegramBotText.value(), method);
+					logger.debug("Text " + telegramBotText.value() + " " + method.getName());
 				}
 				continue;
 			}
 			TelegramBotUrl telegramBotUrl = method.getAnnotation(TelegramBotUrl.class);
 			if (telegramBotUrl != null) {
 				descriptor.url = method;
+				logger.debug("Url " + method.getName());
 				continue;
 			}
 		}

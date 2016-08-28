@@ -25,7 +25,7 @@ import com.charge71.botframework.telegram.annotations.TelegramBot;
  */
 public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod<?>> {
 
-	Logger logger = Logger.getLogger(TelegramBotDispatcher.class);
+	private static final Logger logger = Logger.getLogger(TelegramBotDispatcher.class);
 
 	private Map<String, TelegramBotDescriptor> bots = new HashMap<>();
 
