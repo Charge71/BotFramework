@@ -92,7 +92,7 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 	public void init() {
 		logger.debug("Dispatcher init");
 		for (String botClass : botClasses) {
-			logger.debug("Dispatcher init bot " + botClass);
+			logger.info("Dispatcher init bot " + botClass);
 			try {
 				TelegramBotDescriptor tbd = TelegramBotDescriptor.get(botClass);
 				if (tbd.isTelegramBotApiClientAware()) {
@@ -102,6 +102,7 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 						SetWebhook setWebhook = new SetWebhook();
 						setWebhook.setUrl(tbd.getBotBaseUrl() + "/telegram/" + tbd.getBotToken());
 						client.setWebhook(setWebhook);
+						logger.debug("Dispatcher " + botClass + " setWebhook to " + setWebhook.getUrl());
 					}
 				}
 				bots.put(tbd.getBotToken(), tbd);
