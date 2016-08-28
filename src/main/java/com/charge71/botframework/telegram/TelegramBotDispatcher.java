@@ -39,6 +39,7 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 		if (tbd == null) {
 			return null;
 		}
+		logger.debug("Received update " + update.getUpdateId() + " for " + tbd.getBot().getClass().getName());
 		Method method = null;
 		Message message = update.getMessage();
 		if (message.isCommand()) {
@@ -80,12 +81,14 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 			method = tbd.getDefaultMethod();
 		}
 		if (method != null) {
+			logger.debug("Calling method " + method.getName() + " of " + tbd.getBot().getClass().getName());
 			try {
 				return (BotApiMethod<?>) method.invoke(tbd.getBot(), update);
 			} catch (Exception e) {
 				logger.error(botId + " method " + method.getName() + " invoke error", e);
 			}
 		}
+		logger.debug("No method found for " + tbd.getBot().getClass().getName());
 		return null;
 	}
 
