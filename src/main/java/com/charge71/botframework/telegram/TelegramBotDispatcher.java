@@ -40,6 +40,7 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 			return null;
 		}
 		logger.debug("Received update " + update.getUpdateId() + " for " + tbd.getBot().getClass().getName());
+		logger.debug(update.toString());
 		Method method = null;
 		Message message = update.getMessage();
 		if (message.isCommand()) {
