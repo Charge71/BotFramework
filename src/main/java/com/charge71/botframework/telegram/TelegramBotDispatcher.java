@@ -43,9 +43,11 @@ public class TelegramBotDispatcher implements BotDispatcher<Update, BotApiMethod
 		Method method = null;
 		Message message = update.getMessage();
 		if (message.isCommand()) {
+			logger.debug("Message is command.");
 			for (MessageEntity entity : message.getEntities()) {
 				if (entity != null && entity.getOffset() == 0 && EntityType.BOTCOMMAND.equals(entity.getType())) {
 					String command = entity.getText();
+					logger.debug("Found command " + command);
 					method = tbd.getCommandMethod(command);
 					if (method == null) {
 						for (String prefix : tbd.getPrefixCommandMethods().keySet()) {
