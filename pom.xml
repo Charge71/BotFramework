@@ -19,6 +19,12 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 	<dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
+	
 		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -50,6 +56,7 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
+        <!-- 
 		<dependency>
 			<groupId>com.github.rubenlagus</groupId>
 			<artifactId>TelegramBots</artifactId>
@@ -83,6 +90,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
